@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install 
+          pip install git+https://github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
       - name: Test with pytest
         run: |
           pytest
