@@ -7,13 +7,13 @@ This repository regroup the standard tests to be applied to the different github
 Copy the following yml files to your github repository:
 
 ```yaml
-name: Python package
-
+name: Apply Hakai Tests
 on:
-  commit:
+  push:
+    branches: main
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,11 +21,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - name: Install dependencies
+      - name: Install Hakai Tests
         run: |
           python -m pip install --upgrade pip
-          pip install git+https://github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
+          pip install git+https://HakaiInstitute:${{secrets.CI_TOKEN}}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
       - name: Test with pytest
         run: |
-          pytest
+          pytest --pyargs hakai_data_repo_tests
 ```
