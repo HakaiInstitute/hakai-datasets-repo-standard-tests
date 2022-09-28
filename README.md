@@ -4,7 +4,7 @@ This repository regroup the standard tests to be applied to the different github
 
 # How To
 
-Copy the following yml files to your github repository:
+Copy the following yml files to your github repository under the directory `.github/workflows`:
 
 ```yaml
 name: Apply Hakai Tests
