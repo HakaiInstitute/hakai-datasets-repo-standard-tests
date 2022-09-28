@@ -20,9 +20,10 @@ class TestInstrumentLog(unittest.TestCase):
         df = pd.read_csv(logs[0])
 
         # Review mandatory variables
-        for var in instrument_log_mandatory_variables:
-            if var not in df:
-                logger.exception("instrument-log is missing mandatory variable %s", var)
+        missing_vars = [
+            var for var in instrument_log_mandatory_variables if var not in df
+        ]
+        assert not missing_vars, f"Missing mandatory variable: {missing_vars}"
 
         # Test Data format
         if "deployment_time" in df:
