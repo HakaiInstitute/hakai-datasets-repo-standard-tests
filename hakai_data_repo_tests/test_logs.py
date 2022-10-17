@@ -8,8 +8,29 @@ logger = logging.getLogger(__name__)
 instrument_log_mandatory_variables = ["instrument_sn", "instrument_model"]
 station_log_mandatory_variables = ["station", "latitude", "longitude"]
 
+def review_mandatory_variables(df,mandatory_variables):
+    missing_variables = [variable for variable in mandatory_variables if variable not in df]
+    assert not missing_variables, f"Missing mandatory variables: {missing_variables}"
+
+
+def review_coordinates(df):
+    assert "latitude" in df and "longitude" in df, "Missing coordinate variable latitude or longitude"
+    if "latitude" in df:
+        assert df.query("latitude<-90").any(), "Invalid latitude range below -90"
+        assert df.query("latitude>90").any(), "Invalid latitude range above 90"
+    if "longitude" in df:
+        assert df.query("longitude<-180").any(), "Invalid latitude range above 90"
+        assert df.query("latitude>180").any(), "Invalid latitude range above 90"
+    
+
+def review_time_variables(df,time_variables):
+    for variable in time_variables:
+        if variable not in df:
+            continue
+        _ = pd.to_datetime(df[variable])
 
 class TestInstrumentLog(unittest.TestCase):
+    
     def test_instrument_log(self):
         """Test instrument-log.csv file by reading file, parsing dates
         and making sure that the mandatory columns are available"""
@@ -19,23 +40,15 @@ class TestInstrumentLog(unittest.TestCase):
         # Parse log
         df = pd.read_csv(logs[0])
 
-        # Review mandatory variables
-        missing_vars = [
-            var for var in instrument_log_mandatory_variables if var not in df
-        ]
-        assert not missing_vars, f"Missing mandatory variable: {missing_vars}"
-
         # Test Data format
-        if "deployment_time" in df:
-            df["deployment_time"] = pd.to_datetime(df["deployment_time"])
-
-        if "retrieval_time" in df:
-            df["retrieval_time"] = pd.to_datetime(df["retrieval_time"])
+        review_mandatory_variables(df,instrument_log_mandatory_variables)
+        review_time_variables(df,["deployment_time",'retrievel_time'])
+        review_coordinates(df)
 
     def test_station_log(self):
         """Test station-log.csv file by reading file, parsing dates
         and making sure that the mandatory columns are available"""
-        logs = glob(r"stations-log.csv")
+        logs = glob(r"station-log.csv")
         if not logs:
             return
 
@@ -43,13 +56,6 @@ class TestInstrumentLog(unittest.TestCase):
         df = pd.read_csv(logs[0])
 
         # Review mandatory variables
-        for var in station_log_mandatory_variables:
-            if var not in df:
-                logger.exception("station-log is missing mandatory variable %s", var)
-
-        # Test Data format
-        if "commission_time" in df:
-            df["commission_time"] = pd.to_datetime(df["commission_time"])
-
-        if "decommissioned_time" in df:
-            df["decommissioned_time"] = pd.to_datetime(df["decommissioned_time"])
+        review_mandatory_variables(df,station_log_mandatory_variables)
+        review_time_variables(df,['commission_time','decommissioned_time'])
+        review_coordinates(df)
