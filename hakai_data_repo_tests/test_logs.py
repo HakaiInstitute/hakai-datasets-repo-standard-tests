@@ -16,11 +16,11 @@ def review_mandatory_variables(df,mandatory_variables):
 def review_coordinates(df):
     assert "latitude" in df and "longitude" in df, "Missing coordinate variable latitude or longitude"
     if "latitude" in df:
-        assert df.query("latitude<-90").any(), "Invalid latitude range below -90"
-        assert df.query("latitude>90").any(), "Invalid latitude range above 90"
+        assert df.query("latitude<-90").empty, "Invalid latitude range below -90"
+        assert df.query("latitude>90").empty, "Invalid latitude range above 90"
     if "longitude" in df:
-        assert df.query("longitude<-180").any(), "Invalid latitude range above 90"
-        assert df.query("latitude>180").any(), "Invalid latitude range above 90"
+        assert df.query("longitude<-180").empty, "Invalid latitude range above 90"
+        assert df.query("latitude>180").empty, "Invalid latitude range above 90"
     
 
 def review_time_variables(df,time_variables):
