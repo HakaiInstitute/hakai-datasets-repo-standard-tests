@@ -1,0 +1,5 @@
+data:
+  search_pattern: ['**/*']
+  recursive: true
+file_naming_convention: '.*'
+file_ignore: []

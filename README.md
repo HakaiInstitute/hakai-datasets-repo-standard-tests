@@ -2,7 +2,7 @@
 
 This repository regroup the standard tests to be applied to the different github data repositories handled by the Hakai Institute.
 
-# How To
+# How to add to repository
 
 Copy the following yml files to your github repository under the directory `.github/workflows`:
 
@@ -29,3 +29,23 @@ jobs:
         run: |
           pytest --pyargs hakai_data_repo_tests
 ```
+
+## Configuration
+
+The [default configuration](hakai_data_repo_tests/default-config.yaml) used to apply the different tests. In order to modify any aspect of the configuration, copy the [default configuration](hakai_data_repo_tests/default-config.yaml) at the top of you data repository as `config.yaml` and apply the different modifications needed.
+
+##### Ignore files
+To ignore a particular list of files from the tests, add the `.fileignore` file at the head of the directory (similar to `.gitignore`) or add the following to the `config.yaml`:
+
+```yaml
+ignore_files: [list_of_file_expressions_to_ignore]
+```
+
+# Tests applied
+
+### Metadata log tests
+
+1. Review time variables
+2. Review latitude and longitude
+
+### Naming convention
