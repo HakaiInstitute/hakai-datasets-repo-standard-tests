@@ -1,4 +1,0 @@
-data:
-  search_pattern: ['**/*.csv', '**/*.txt', '**/*.MON']
-  recursive: true
-file_naming_convention: '(?P<station>[^\\\/]+)_(?P<serial_number>\d+)_(?P<retrival_date>\d{8})(?P<extra>_rawdata){0,1}\..{3}$'
