@@ -4,9 +4,12 @@ from glob import glob
 import os
 
 # Load default configuration
-with open(os.path.join(os.path.dirname(__file__),"default-config.yaml"), encoding="UTF-8") as file_handle:
+with open(
+    os.path.join(os.path.dirname(__file__), "default-config.yaml"), encoding="UTF-8"
+) as file_handle:
     config = yaml.load(file_handle, Loader=yaml.loader.SafeLoader)
- 
+
+
 def read_data_repo_config():
     """Get dataset repository configuration"""
     if os.path.exists("data-repo-config.yaml"):
@@ -14,7 +17,7 @@ def read_data_repo_config():
             config.update(yaml.load(file_handle, Loader=yaml.loader.SafeLoader))
 
     if os.path.exists(".fileignore"):
-        with open(".fileignore",encoding="UTF-8") as file_handle:
+        with open(".fileignore", encoding="UTF-8") as file_handle:
             config["file_ignore"] = [line.strip() for line in file_handle.readlines()]
     return config
 
