@@ -10,5 +10,5 @@ setup(
     author_email="jessy.barrette@hakai,org",
     url="https://github.com/HakaiInstitute/hakai-datasets-repo-standard-tests",
     packages=["hakai_data_repo_tests"],
-    install_requires=["pytest", "pandas"],
+    install_requires=["pytest", "pandas","pyyaml"],
 )
