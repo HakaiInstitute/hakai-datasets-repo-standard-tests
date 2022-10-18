@@ -12,8 +12,8 @@ with open(
 
 def read_data_repo_config():
     """Get dataset repository configuration"""
-    if os.path.exists("data-repo-config.yaml"):
-        with open("data-repo-config.yaml", encoding="UTF-8") as file_handle:
+    if os.path.exists("config.yaml"):
+        with open("config.yaml", encoding="UTF-8") as file_handle:
             config.update(yaml.load(file_handle, Loader=yaml.loader.SafeLoader))
 
     if os.path.exists(".fileignore"):
