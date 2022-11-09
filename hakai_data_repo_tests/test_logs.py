@@ -8,10 +8,12 @@ logger = logging.getLogger(__name__)
 instrument_log_mandatory_variables = ["instrument_sn", "instrument_model"]
 station_log_mandatory_variables = ["station", "latitude", "longitude"]
 
+
 def read_logs(log_path):
     logs = glob(log_path)
     if logs:
         return pd.read_csv(logs[0])
+
 
 def review_mandatory_variables(df, mandatory_variables):
     missing_variables = [
@@ -41,42 +43,44 @@ def review_time_variables(df, time_variables):
 
 class TestInstrumentLog(unittest.TestCase):
 
-        # Test Data format
+    # Test Data format
     def test_instrument_log_mandatory_variables(self):
         """Test instrument-log.csv file to make sure that the mandatory columns are available"""
         df = read_logs("instrument_log.csv")
         if df is None:
             return
         review_mandatory_variables(df, instrument_log_mandatory_variables)
+
     def test_instrument_log_time_variables(self):
         """Test instrument-log.csv file by parsing dates"""
         df = read_logs("instrument_log.csv")
         if df is None:
             return
         review_time_variables(df, ["deployment_time", "retrievel_time"])
+
     def test_instrument_log_coordinates_variables(self):
         """Test instrument-log.csv file and confirm that coordinate variables are in the correct range"""
         df = read_logs("instrument_log.csv")
         if df is None:
             return
         review_coordinates(df)
-class TestStationLog(unittest.TestCase):
-        
 
+
+class TestStationLog(unittest.TestCase):
     def test_station_log_mandatory_variables(self):
         """Test station-log.csv file to make sure that the mandatory columns are available"""
         df = read_logs("station_log.csv")
         if df is None:
             return
         review_mandatory_variables(df, station_log_mandatory_variables)
-    
+
     def test_station_log_time_variables(self):
         """Test station-log.csv file by parsing dates"""
         df = read_logs("station_log.csv")
         if df is None:
             return
         review_time_variables(df, ["commission_time", "decommissioned_time"])
-    
+
     def test_station_log_coordinates_variables(self):
         """Test station-log.csv file and confirm that coordinate variables are in the correct range"""
         df = read_logs("station_log.csv")
