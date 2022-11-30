@@ -87,3 +87,15 @@ class TestStationLog(unittest.TestCase):
         if df is None:
             return
         review_coordinates(df)
+
+
+class TestLogs(unittest.TestCase):
+    def test_for_duplicated_columns(self):
+        df_instrument = read_logs("instrument-log.csv")
+        df_station = read_logs("station-log.csv")
+        if df_instrument is None or df_station is None:
+            return
+        duplicated_columns = set(df_instrument.columns) & set(df_station.columns)
+        assert (
+            len(duplicated_columns) == 0
+        ), f"Duplicated columns exists between station-log and instrument-log: {duplicated_columns}"
