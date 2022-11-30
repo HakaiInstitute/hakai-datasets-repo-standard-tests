@@ -1,7 +1,7 @@
-import unittest
 import os
-import pandas as pd
+import unittest
 
+import pandas as pd
 
 # Load data dictionary
 data_dictionary_path = "data-dictionary.csv"
