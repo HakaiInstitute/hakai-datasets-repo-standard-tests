@@ -46,21 +46,21 @@ class TestInstrumentLog(unittest.TestCase):
     # Test Data format
     def test_instrument_log_mandatory_variables(self):
         """Test instrument-log.csv file to make sure that the mandatory columns are available"""
-        df = read_logs("instrument_log.csv")
+        df = read_logs("instrument-log.csv")
         if df is None:
             return
         review_mandatory_variables(df, instrument_log_mandatory_variables)
 
     def test_instrument_log_time_variables(self):
         """Test instrument-log.csv file by parsing dates"""
-        df = read_logs("instrument_log.csv")
+        df = read_logs("instrument-log.csv")
         if df is None:
             return
         review_time_variables(df, ["deployment_time", "retrievel_time"])
 
     def test_instrument_log_coordinates_variables(self):
         """Test instrument-log.csv file and confirm that coordinate variables are in the correct range"""
-        df = read_logs("instrument_log.csv")
+        df = read_logs("instrument-log.csv")
         if df is None:
             return
         review_coordinates(df)
@@ -69,21 +69,21 @@ class TestInstrumentLog(unittest.TestCase):
 class TestStationLog(unittest.TestCase):
     def test_station_log_mandatory_variables(self):
         """Test station-log.csv file to make sure that the mandatory columns are available"""
-        df = read_logs("station_log.csv")
+        df = read_logs("station-log.csv")
         if df is None:
             return
         review_mandatory_variables(df, station_log_mandatory_variables)
 
     def test_station_log_time_variables(self):
         """Test station-log.csv file by parsing dates"""
-        df = read_logs("station_log.csv")
+        df = read_logs("station-log.csv")
         if df is None:
             return
         review_time_variables(df, ["commission_time", "decommissioned_time"])
 
     def test_station_log_coordinates_variables(self):
         """Test station-log.csv file and confirm that coordinate variables are in the correct range"""
-        df = read_logs("station_log.csv")
+        df = read_logs("station-log.csv")
         if df is None:
             return
         review_coordinates(df)
