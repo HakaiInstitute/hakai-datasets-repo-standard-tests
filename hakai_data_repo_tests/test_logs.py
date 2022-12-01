@@ -95,7 +95,7 @@ class TestLogs(unittest.TestCase):
         df_station = read_logs("station-log.csv")
         if df_instrument is None or df_station is None:
             return
-        duplicated_columns = set(df_instrument.columns) & set(df_station.columns)
+        duplicated_columns = set(df_instrument.columns) & set(df_station.columns) - {"station",}
         assert (
             len(duplicated_columns) == 0
         ), f"Duplicated columns exists between station-log and instrument-log: {duplicated_columns}"
