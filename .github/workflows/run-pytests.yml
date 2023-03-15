@@ -18,5 +18,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install git+https://HakaiInstitute:${{secrets.CI_TOKEN}}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
       - name: Test with pytest
+        working-directory: ./test_repo
         run: |
           pytest --pyargs hakai_data_repo_tests
