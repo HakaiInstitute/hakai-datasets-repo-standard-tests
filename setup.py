@@ -11,5 +11,5 @@ setup(
     url="https://github.com/HakaiInstitute/hakai-datasets-repo-standard-tests",
     packages=["hakai_data_repo_tests"],
     include_package_data=True,
-    install_requires=["pytest", "pandas", "pyyaml"],
+    install_requires=["pytest", "pandas", "pyyaml", "lxml"],
 )
