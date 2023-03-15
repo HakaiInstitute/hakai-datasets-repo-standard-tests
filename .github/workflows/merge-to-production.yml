@@ -4,7 +4,7 @@ on:
     branches: master
 env:
   GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
-  MERGE_FROM_BRANCH: main
+  MERGE_FROM_BRANCH: master
   MERGE_TO_BRANCH: production
 
 jobs:
@@ -37,9 +37,9 @@ jobs:
           gh pr status >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: Create Pull Request
-        if: ${{contains(env.PR_STATUS, 'There is no pull request associated with [main]')}}
+        if: ${{contains(env.PR_STATUS, 'There is no pull request associated with [master]')}}
         run: |
-          gh pr create -H ${{env.MERGE_FROM_BRANCH}} -B ${{env.MERGE_TO_BRANCH}} --title "Merge latest changes to main into production branch" --body-file ".github/workflows/production-merge-pull-request-body.md"
+          gh pr create -H ${{env.MERGE_FROM_BRANCH}} -B ${{env.MERGE_TO_BRANCH}} --title "Merge latest changes to master into production branch" --body-file ".github/workflows/production-merge-pull-request-body.md"
 
   merge:
     runs-on: ubuntu-latest
