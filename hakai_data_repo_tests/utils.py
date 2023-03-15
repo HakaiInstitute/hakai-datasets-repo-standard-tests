@@ -1,7 +1,8 @@
-import yaml
+import os
 from fnmatch import fnmatch
 from glob import glob
-import os
+
+import yaml
 
 # Load default configuration
 with open(

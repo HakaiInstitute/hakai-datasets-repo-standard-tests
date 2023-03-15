@@ -1,7 +1,7 @@
 import logging
-import unittest
-import re
 import os
+import re
+import unittest
 
 from . import utils
 
