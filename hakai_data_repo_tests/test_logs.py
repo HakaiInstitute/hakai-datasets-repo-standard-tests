@@ -88,6 +88,12 @@ class TestStationLog(unittest.TestCase):
             return
         review_coordinates(df)
 
+    def test_station_log_empty_station(self):
+        df = read_logs("station-log.csv")
+        if df is None:
+            return
+        assert not df['station'].isna().any(), f"station-log.csv contains rows with no station assigned:\n{df.loc[df['station'].isna()]}"
+
 
 class TestLogs(unittest.TestCase):
     def test_for_duplicated_columns(self):
