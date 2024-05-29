@@ -1,7 +1,9 @@
 name: Test data and merge to production
 on:
   push:
-    branches: master
+    branches: 
+      - master
+      - main
 env:
   GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
   MERGE_FROM_BRANCH: master
