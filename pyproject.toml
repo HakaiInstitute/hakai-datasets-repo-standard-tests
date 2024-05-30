@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "hakai-datasets-repo-standard-tests"
+version = "0.1.0"
+description = ""
+authors = ["Jessy Barrette <30420025+JessyBarrette@users.noreply.github.com>"]
+readme = "README.md"
+packages = [
+    { include = "hakai_data_repo_tests", from = "." },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^8.2.1"
+pandas = "^2.2.2"
+PyYAML = "^6.0.1"
+lxml = "^5.2.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+isort = "^5.13.2"
+ruff = "^0.4.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

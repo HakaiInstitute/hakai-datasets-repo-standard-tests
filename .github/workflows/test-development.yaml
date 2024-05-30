@@ -3,6 +3,11 @@ name: Test dataset
 on:
   pull_request:
     branches: master
+  push:
+    branches: 
+        - master
+        - development
+        - main
 
 jobs:
   tests:
@@ -15,7 +20,7 @@ jobs:
       - name: Install Hakai Tests
         run: |
           python -m pip install --upgrade pip
-          pip install git+https://HakaiInstitute:${{secrets.CI_TOKEN}}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
+          pip install .
       - name: Test with pytest
         working-directory: ./test_repo
         run: |
