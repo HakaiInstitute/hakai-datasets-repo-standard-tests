@@ -1,0 +1,37 @@
+name: Hakai Data Repositories Standard Tests
+description: Hakai Data Repositories Standard Tests run a series of tests to ensure that the data repository is compliant with the Hakai Data Repositories Standard.
+inputs:
+  config_path:
+    description: "Dataset repository config file path."
+    required: true
+    default: "config.yaml"
+  username:
+    description: "Username for the repository."
+    required: true
+    default: "HakaiInstitute"
+  token:
+    description: "Token for the repository."
+    required: true
+    default: ${{secrets.CI_TOKEN}}
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - name: Install Hakai Tests
+      shell: bash
+      env:
+        USER_NAME: ${{inputs.username}}
+        TOKEN: ${{inputs.token}}
+      run: |
+        python -m pip install --upgrade pip
+        pip install git+https://${{USER_NAME}}:${{TOKEN}}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
+    - name: Test with pytest
+      shell: bash
+      working-directory: ./test_repo
+      run: |
+        pytest --pyargs hakai_data_repo_tests
