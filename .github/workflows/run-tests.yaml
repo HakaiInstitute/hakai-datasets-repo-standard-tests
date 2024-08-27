@@ -26,4 +26,4 @@ jobs:
           pytest .
       - name: Test with test_repo
         run: |
-          python -m hakai_data_repo_standard_tests --dir test_repo
+          python -m hakai_data_repo_tests --dir test_repo
