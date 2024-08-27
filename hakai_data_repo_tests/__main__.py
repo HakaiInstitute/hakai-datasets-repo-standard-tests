@@ -1,7 +1,7 @@
-import sys
-import os
-
 import logging
+import os
+import sys
+
 import pytest
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))

@@ -1,16 +1,19 @@
+import logging
 import os
+from pathlib import Path
 
 import pytest
 
 from hakai_data_repo_tests import utils
-import logging
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
-logger = logging.getLogger(__name__)    
+logger = logging.getLogger(__name__)
 
 
 def pytest_addoption(parser):
-    parser.addoption("--dir", default=".", action="store", help="Base directory to run tests from")
+    parser.addoption(
+        "--dir", default=".", action="store", help="Base directory to run tests from"
+    )
     parser.addoption(
         "--config-path",
         action="store",
@@ -20,16 +23,26 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(scope="session")
-def dir(request) -> str:
-    dir = request.config.getoption("--dir")
+def dir(request) -> Path:
+    dir = Path(request.config.getoption("--dir") or ".").resolve()
     logger.info(f"Base directory: {dir}")
-    return dir
+    # Change to base directory and return back to original directory once tests are done
+    original_dir = os.getcwd()
+    os.chdir(dir)
+    logger.info(f"Changed to base directory: {dir}")
+    yield dir
+    os.chdir(original_dir)
+    logger.info(f"Changed back to original directory: {original_dir}")
 
 
 @pytest.fixture(scope="session")
-def config_path(request) -> str:
-    config_path = request.config.getoption("--config-path")
+def config_path(request, dir) -> Path:
+    config_path = Path(
+        request.config.getoption("--config-path") or "config.yaml"
+    ).resolve()
     logger.info(f"Config path: {config_path}")
+    if config_path.exists():
+        logger.info(f"Configuration file found: {config_path}")
     return config_path
 
 
@@ -38,19 +51,6 @@ def config(config_path) -> dict:
     config = utils.read_data_repo_config(config_path)
     logger.info(f"Configuration: {config}")
     return config
-
-
-@pytest.fixture(scope="session")
-def change_base_dir(dir):
-    if dir:
-        original_dir = os.getcwd()
-        os.chdir(dir)
-        logger.info(f"Changed directory to {dir}")
-        yield
-        os.chdir(original_dir)
-        logger.info(f"Changed directory back to {original_dir}")
-    else:
-        yield
 
 
 @pytest.fixture(scope="session")

@@ -9,11 +9,12 @@ logger = logging.getLogger(__name__)
 def test_matching_files_check(config):
     """Check if a list of files match an equivalent list of
     files by replaceing a specific expression by another."""
-    logger.warning("Configuration loaded: %s", config)
-
     matched_files = config.get("matched_files", [])
+    if not matched_files:
+        logger.debug("No matched files to check")
+        return
     missing_matches = []
-    logger.warning("Checking matched files %s", matched_files)
+    logger.info("Checking matched files %s", matched_files)
     for group in matched_files:
         logger.info("Checking group %s", group)
         files = glob(group.get("files"), recursive=group.get("recursive", True))
@@ -27,4 +28,4 @@ def test_matching_files_check(config):
             if not Path(matched_file).exists()
         ]
 
-    assert not missing_matches, f"Missing files: {missing_matches}"
+    assert not missing_matches, f"Missing matched files: {missing_matches}"
