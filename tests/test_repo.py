@@ -3,7 +3,7 @@ import pytest
 from hakai_data_repo_tests import test_matching_files
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def config():
     return {
         "file_naming_convention": ".*",
@@ -28,7 +28,7 @@ class TestMatchingFiles:
                 {"files": f"{tmp_path}/*", "pattern": ".txt", "replace": ".csv"}
             ]
         }
-        test_matching_files.test_matching_files_check(config)
+        test_matching_files.test_matched_files_check(config)
 
     def test_fail_matching_file_check(self, config, tmp_path):
         # Add tmp files
@@ -40,4 +40,4 @@ class TestMatchingFiles:
             ]
         }
         with pytest.raises(AssertionError):
-            test_matching_files.test_matching_files_check(config)
+            test_matching_files.test_matched_files_check(config)
