@@ -1,5 +1,4 @@
 import os
-import unittest
 
 import pandas as pd
 
@@ -12,7 +11,7 @@ def read_data_dictionary():
         return pd.read_csv(data_dictionary_path)
 
 
-class TestDataDictionary(unittest.TestCase):
+class TestDataDictionary:
     def test_variable_dictionary_readable(self):
         """Try to read the data dictionary if available."""
         df_vars = read_data_dictionary()

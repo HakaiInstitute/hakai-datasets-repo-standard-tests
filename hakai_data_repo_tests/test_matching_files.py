@@ -3,15 +3,10 @@ import re
 from glob import glob
 from pathlib import Path
 
-from hakai_data_repo_tests import utils
-
 logger = logging.getLogger(__name__)
 
-config = utils.read_data_repo_config()
-assert isinstance(config, dict), f"Configuration not loaded properly {config=}"
 
-
-def test_matching_files_check():
+def test_matching_files_check(config):
     """Check if a list of files match an equivalent list of
     files by replaceing a specific expression by another."""
     logger.warning("Configuration loaded: %s", config)
@@ -26,7 +21,10 @@ def test_matching_files_check():
         matched_files = [
             re.sub(group["pattern"], group["replace"], file) for file in files
         ]
-        missing_matches = [f"{file} -> {matched_file}" for file, matched_file in zip(files,matched_files) if not Path(matched_file).exists()]
-
+        missing_matches = [
+            f"{file} -> {matched_file}"
+            for file, matched_file in zip(files, matched_files)
+            if not Path(matched_file).exists()
+        ]
 
     assert not missing_matches, f"Missing files: {missing_matches}"

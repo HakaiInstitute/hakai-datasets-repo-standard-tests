@@ -1,17 +1,14 @@
 import logging
 import os
 import re
-import unittest
 
 from . import utils
 
 logger = logging.getLogger(__name__)
 
-config = utils.read_data_repo_config()
 
-
-class TestFileNameConvention(unittest.TestCase):
-    def test_filename_convention(self):
+class TestFileNameConvention:
+    def test_filename_convention(self, config):
         """Review Hakai File Name Convention"""
         convention_expression = config.get("file_naming_convention")
         if convention_expression is None:

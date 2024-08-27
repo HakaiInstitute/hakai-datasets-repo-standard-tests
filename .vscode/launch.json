@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+
+
+        {
+            "name": "Run tests on test_repo",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "hakai_data_repo_tests",
+            "console": "integratedTerminal",
+            "args": ["test_repo","--config-path", "test_repo/config.yaml"]
+        }
+    ]
+}

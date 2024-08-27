@@ -1,7 +1,8 @@
-import os
 import logging
+import os
 from fnmatch import fnmatch
 from glob import glob
+from pathlib import Path
 
 import yaml
 
@@ -9,22 +10,33 @@ logger = logging.getLogger(__name__)
 
 # Load default configuration
 with open(
-    os.path.join(os.path.dirname(__file__), "default-config.yaml"), encoding="UTF-8"
+    Path(__file__).parent / "default-config.yaml", encoding="UTF-8"
 ) as file_handle:
     config = yaml.load(file_handle, Loader=yaml.loader.SafeLoader)
 
 
-def read_data_repo_config():
+def read_data_repo_config(config_path="config.yaml", file_ignore_path=".fileignore"):
     """Get dataset repository configuration"""
-    if os.path.exists("config.yaml"):
-        with open("config.yaml", encoding="UTF-8") as file_handle:
+    config_path = Path(config_path)
+    file_ignore_path = Path(file_ignore_path)
+    if config_path.exists():
+        logger.info("Loading configuration from %s", config_path)
+        with open(config_path, encoding="UTF-8") as file_handle:
             config.update(yaml.load(file_handle, Loader=yaml.loader.SafeLoader))
     else:
-        logger.warning("No configuration file found. Using default configuration.")
+        logger.warning(
+            "No configuration file found. Using default configuration: %s", config
+        )
 
-    if os.path.exists(".fileignore"):
-        with open(".fileignore", encoding="UTF-8") as file_handle:
-            config["file_ignore"] = [line.strip() for line in file_handle.readlines()]
+    if file_ignore_path.exists():
+        logger.info("Loading file ignore patterns from %s", file_ignore_path)
+        if not config.get("file_ignore"):
+            config["file_ignore"] = []
+        else:
+            logger.info(
+                "Append file ignore patterns to existing list from configuration file."
+            )
+            config["file_ignore"] += file_ignore_path.read_text().splitlines()
     return config
 
 
