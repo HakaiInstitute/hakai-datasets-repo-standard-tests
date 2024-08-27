@@ -6,7 +6,7 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 
-def test_matching_files_check(config):
+def test_matched_files_check(config):
     """Check if a list of files match an equivalent list of
     files by replaceing a specific expression by another."""
     matched_files = config.get("matched_files", [])
@@ -28,4 +28,6 @@ def test_matching_files_check(config):
             if not Path(matched_file).exists()
         ]
 
-    assert not missing_matches, f"Missing matched files: {missing_matches}"
+    assert (
+        not missing_matches
+    ), f"The following files require an equivalent (): {missing_matches}"
