@@ -9,6 +9,10 @@ inputs:
     description: 'Path to the repository configuration file'
     required: true
     default: 'config.yaml'
+  token:
+    description: 'GitHub token'
+    required: true
+    default: ${{ secrets.CI_TOKEN }}
 outputs:
   tests-results:
     description: 'Tests results'
@@ -24,7 +28,7 @@ runs:
       shell: bash
       run: |
         python -m pip install --upgrade pip
-        pip install git+https://HakaiInstitute:${{ secrets.CI_TOKEN }}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
+        pip install git+https://HakaiInstitute:${{ inputs.token }}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
     - name: Run tests
       shell: bash
       run: |
