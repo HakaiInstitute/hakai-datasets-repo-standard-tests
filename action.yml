@@ -31,6 +31,6 @@ runs:
     - name: Run tests
       shell: bash
       run: |
-        hakai_data_repo_tests --dir ${{ inputs.dir }} --config-file ${{ inputs.config-file }} >> $GITHUB_OUTPUT
+        python hakai_data_repo_tests --dir ${{ inputs.dir }} --config-file ${{ inputs.config-file }} >> $GITHUB_OUTPUT
 
 
