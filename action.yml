@@ -12,7 +12,7 @@ inputs:
   token:
     description: 'GitHub token'
     required: true
-    default: ${{ secrets.CI_TOKEN }}
+    default: ${{ secrets.GITHUB_TOKEN }}
 outputs:
   tests-results:
     description: 'Tests results'

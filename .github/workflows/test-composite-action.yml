@@ -15,3 +15,5 @@ jobs:
       - name: Run hakai tests composite action development branch
         if: ${{ github.ref_name== 'development' }}
         uses: hakaiinstitute/hakai-datasets-repo-standard-tests@development
+        with:
+            token: ${{ secrets.CI_TOKEN}}
