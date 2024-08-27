@@ -2,7 +2,7 @@ name: Test Composite Action
 on:
   push:
     branches:
-      - main
+      - master
       - development
 
 jobs:
@@ -11,10 +11,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Run hakai tests composite action main branch
-        if: ${{ github.ref_name== 'main' }}
-        uses: hakaiinstitute/hakai-datasets-repo-standard-tests@main
     
       - name: Run hakai tests composite action development branch
         if: ${{ github.ref_name== 'development' }}
