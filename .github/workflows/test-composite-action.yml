@@ -13,4 +13,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run hakai tests composite action
-        with: hakaiinstitute/hakai-datasets-repo-standard-tests@${{ github.ref_name}}
+        uses: hakaiinstitute/hakai-datasets-repo-standard-tests@${{ github.ref_name}}
