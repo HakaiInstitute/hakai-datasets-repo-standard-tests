@@ -19,4 +19,4 @@ jobs:
       - name: Test with pytest
         working-directory: ./test_repo
         run: |
-          pytest --pyargs hakai_data_repo_tests
+          python hakai_data_repo_tests --dir=test_repo
