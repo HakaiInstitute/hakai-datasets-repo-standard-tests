@@ -1,0 +1,33 @@
+name: 'Hakai Dataset Repository Standard Tests'
+description: 'Run a series of tests on a dataset repository to ensure it meets the Hakai Institute standards.'
+inputs:
+  dir:  # id of input
+    description: 'base directory where to run the tests'
+    required: true
+    default: '.'
+  config-file:
+    description: 'Path to the repository configuration file'
+    required: true
+    default: 'config.yaml'
+outputs:
+  tests-results:
+    description: 'Tests results'
+    value: ${{ steps.run_tests.outputs.results }}
+runs:
+  using: "composite"
+  steps:
+    - name: Install python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install Hakai Tests
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install git+https://HakaiInstitute:${{ secrets.CI_TOKEN }}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
+    - name: Run tests
+      shell: bash
+      run: |
+        hakai_data_repo_tests --dir ${{ inputs.dir }} --config-file ${{ inputs.config-file }} >> $GITHUB_OUTPUT
+
+

@@ -1,0 +1,16 @@
+name: Test Composite Action
+on:
+  push:
+    branches:
+      - main
+      - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run hakai tests composite action
+        with: hakaiinstitute/hakai-datasets-repo-standard-tests@${{ github.ref_name}}
