@@ -15,7 +15,7 @@ inputs:
 outputs:
   tests-results:
     description: 'Tests results'
-    value: ${{ steps.run_tests.outputs.results }}
+    value: ${{ steps.tests.outputs.results }}
 runs:
   using: "composite"
   steps:
@@ -30,7 +30,7 @@ runs:
         pip install git+https://HakaiInstitute:${{ inputs.token }}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
     - name: Run tests
       shell: bash
+      id: tests
       run: |
         python hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}' >> $GITHUB_OUTPUT
-
-
+        echo "::set-output name=results::$(cat $GITHUB_OUTPUT)"
