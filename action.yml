@@ -15,7 +15,7 @@ inputs:
 outputs:
   tests-results:
     description: 'Tests results'
-    value: ${{ steps.tests.outputs }}
+    value: ${{ steps.tests.outputs.results }}
 runs:
   using: "composite"
   steps:
@@ -32,4 +32,5 @@ runs:
       shell: bash
       id: tests
       run: |
-        python hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}' >> $GITHUB_OUTPUT
+        echo "results=$(python hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}')" >> $GITHUB_ENV
+
