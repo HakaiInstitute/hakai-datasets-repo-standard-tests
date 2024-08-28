@@ -36,4 +36,6 @@ runs:
 
     - name: Surface failing tests
       if: always()
-      uses: pmeier/pytest-results-action@main
+      uses: pmeier/pytest-results-action@0.7.1
+      with:
+        path: test-results.xml
