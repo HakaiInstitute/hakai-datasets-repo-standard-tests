@@ -32,5 +32,6 @@ runs:
       shell: bash
       id: tests
       run: |
-        echo "results=$(python hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}')" >> $GITHUB_ENV
+        python hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}' > results.txt
+        echo "results=\'$(cat results.txt)\'" >> $GITHUB_ENV
 
