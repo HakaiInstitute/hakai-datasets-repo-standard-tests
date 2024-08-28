@@ -45,4 +45,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     logging.basicConfig(level=args.log_level)
-    main(args.dir, args.config_path, log_level=args.log_level)
+    result = main(args.dir, args.config_path, log_level=args.log_level)
+    sys.exit(result)
