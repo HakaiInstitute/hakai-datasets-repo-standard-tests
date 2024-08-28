@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def main(dir, config_path, log_level="INFO"):
-    logger.info(f"Running tests with arguments: {args}")
+    logger.info(f"Running tests with arguments: {dir=}, {config_path=}, {log_level=}")
     return sys.exit(
         pytest.main(
             args=[
