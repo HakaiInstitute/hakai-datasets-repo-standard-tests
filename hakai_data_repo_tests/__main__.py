@@ -8,19 +8,17 @@ import pytest
 logger = logging.getLogger(__name__)
 
 
-def main(dir, config_path, log_level="INFO"):
+def main(dir=".", config_path="config.yaml", log_level="INFO"):
     logger.info(f"Running tests with arguments: {dir=}, {config_path=}, {log_level=}")
-    return sys.exit(
-        pytest.main(
-            args=[
-                "--capture=tee-sys",
-                f"--log-cli-level={log_level}",
-                "--pyargs",
-                "hakai_data_repo_tests",
-                f"--dir={dir}",
-                f"--config-path={config_path}",
-            ]
-        )
+    return pytest.main(
+        args=[
+            "--capture=tee-sys",
+            f"--log-cli-level={log_level}",
+            "--pyargs",
+            "hakai_data_repo_tests",
+            f"--dir={dir}",
+            f"--config-path={config_path}",
+        ]
     )
 
 
