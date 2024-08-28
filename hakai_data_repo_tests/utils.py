@@ -30,13 +30,7 @@ def read_data_repo_config(config_path="config.yaml", file_ignore_path=".fileigno
 
     if file_ignore_path.exists():
         logger.info("Loading file ignore patterns from %s", file_ignore_path)
-        if not config.get("file_ignore"):
-            config["file_ignore"] = []
-        else:
-            logger.info(
-                "Append file ignore patterns to existing list from configuration file."
-            )
-            config["file_ignore"] += file_ignore_path.read_text().splitlines()
+        config["file_ignore"] += file_ignore_path.read_text().splitlines()
     return config
 
 
