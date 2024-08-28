@@ -33,7 +33,7 @@ runs:
       id: tests
       run: |
         python hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}' --junit-xml='test-results.xml' > test_results.txt
-        echo "results='$(cat test_results.txt)'" >> $GITHUB_ENV
+        echo "results='$(cat test_results.txt)'" >> $GITHUB_OUTPUT
 
     - name: Surface failing tests
       if: always()
