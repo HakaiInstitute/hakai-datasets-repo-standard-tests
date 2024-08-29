@@ -4,7 +4,7 @@ import sys
 from argparse import ArgumentParser
 
 import pytest
-import conftest
+from hakai_data_repo_tests import conftest
 
 logger = logging.getLogger(__name__)
 
