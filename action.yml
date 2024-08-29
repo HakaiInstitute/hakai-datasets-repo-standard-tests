@@ -27,12 +27,12 @@ runs:
       shell: bash
       run: |
         python -m pip install --upgrade pip
-        pip install git+https://HakaiInstitute:${{ inputs.token }}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git
+        pip install git+https://HakaiInstitute:${{ inputs.token }}@github.com/HakaiInstitute/hakai-datasets-repo-standard-tests.git@development
     - name: Run tests
       shell: bash
       id: tests
       run: |
-        python -m hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}' --junit-xml='test-results.xml'
+        python hakai_data_repo_tests --dir='${{ inputs.dir }}' --config-path='${{ inputs.config-file }}' --junit-xml='test-results.xml'
 
     - name: Surface failing tests
       if: always()
