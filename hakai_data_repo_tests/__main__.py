@@ -4,7 +4,6 @@ import sys
 from argparse import ArgumentParser
 
 import pytest
-from hakai_data_repo_tests import conftest
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +22,6 @@ def main(dir=".", config_path="config.yaml", log_level="INFO", junit_xml=None):
             config_path,
         ]
         + (["--junit-xml", junit_xml] if junit_xml else []),
-        plugins=[conftest]
     )
 
 
