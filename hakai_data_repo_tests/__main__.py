@@ -21,7 +21,8 @@ def main(dir=".", config_path="config.yaml", log_level="INFO", junit_xml=None):
             "--config-path",
             config_path,
         ]
-        + (["--junit-xml", junit_xml] if junit_xml else [])
+        + (["--junit-xml", junit_xml] if junit_xml else []),
+        plugins=["conftest"],
     )
 
 
