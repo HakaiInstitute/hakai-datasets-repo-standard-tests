@@ -1,0 +1,1 @@
+This directory is only use for testing the hakai tests.
