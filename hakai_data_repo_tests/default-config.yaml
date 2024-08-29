@@ -3,3 +3,7 @@ data:
   recursive: true
 file_naming_convention: '.*'
 file_ignore: []
+table_prefix: ''
+instrument_log: null
+station_log: null
+default_database_table_template: null
