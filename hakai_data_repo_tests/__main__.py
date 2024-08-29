@@ -14,6 +14,7 @@ def main(dir=".", config_path="config.yaml", log_level="INFO", junit_xml=None):
         args=[
             "--capture=tee-sys",
             f"--log-cli-level={log_level}",
+            "--traceconfig",
             "--pyargs",
             "hakai_data_repo_tests",
             "--dir",
