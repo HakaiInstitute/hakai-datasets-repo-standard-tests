@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          repository: HakaiInstitute/hakai-pruth-mooring-data
+          branch: production
+          token: ${{ secrets.CI_TOKEN}}
     
       - name: Run hakai tests composite action development branch
         if: ${{ github.ref_name== 'development' }}
