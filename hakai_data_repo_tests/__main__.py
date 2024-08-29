@@ -16,8 +16,10 @@ def main(dir=".", config_path="config.yaml", log_level="INFO", junit_xml=None):
             f"--log-cli-level={log_level}",
             "--pyargs",
             "hakai_data_repo_tests",
-            f"--dir='{dir}'",
-            f"--config-path='{config_path}'",
+            "--dir",
+            dir,
+            "--config-path",
+            config_path,
         ]
         + (["--junit-xml", junit_xml] if junit_xml else [])
     )
@@ -51,5 +53,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     logging.basicConfig(level=args.log_level)
-    result = main(args.dir, args.config_path, log_level=args.log_level, junit_xml=args.junit_xml)
+    result = main(
+        args.dir, args.config_path, log_level=args.log_level, junit_xml=args.junit_xml
+    )
     sys.exit(result)
