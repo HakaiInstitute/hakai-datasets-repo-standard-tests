@@ -16,8 +16,8 @@ def main(dir=".", config_path="config.yaml", log_level="INFO", junit_xml=None):
             f"--log-cli-level={log_level}",
             "--pyargs",
             "hakai_data_repo_tests",
-            f"--dir={dir}",
-            f"--config-path={config_path}",
+            f"--dir='{dir}'",
+            f"--config-path='{config_path}'",
         ]
         + (["--junit-xml", junit_xml] if junit_xml else [])
     )
