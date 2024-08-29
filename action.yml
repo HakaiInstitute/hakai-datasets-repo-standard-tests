@@ -12,6 +12,7 @@ inputs:
   token:
     description: 'GitHub token'
     required: true
+    default: ${{ secrets.CI_TOKEN}}
 runs:
   using: "composite"
   steps:
