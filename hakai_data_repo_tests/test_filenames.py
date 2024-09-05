@@ -24,7 +24,7 @@ class TestFileNameConvention(unittest.TestCase):
         for pattern in config["data"]["search_pattern"]:
             files += utils.get_file_list(
                 pattern,
-                file_ignore=config["fileignore"],
+                file_ignore=config.get("fileignore"),
                 recursive=config["data"]["recursive"],
             )
 
