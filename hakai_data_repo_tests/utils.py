@@ -24,7 +24,7 @@ def read_data_repo_config():
 
     if os.path.exists(".fileignore"):
         with open(".fileignore", encoding="UTF-8") as file_handle:
-            config["file_ignore"] = [line.strip() for line in file_handle.readlines()]
+            config["fileignore"] = [line.strip() for line in file_handle.readlines()]
     return config
 
 
