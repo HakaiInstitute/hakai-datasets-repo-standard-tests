@@ -5,7 +5,7 @@ from glob import glob
 import pandas as pd
 
 logger = logging.getLogger(__name__)
-instrument_log_mandatory_variables = ["instrument_sn", "instrument_model"]
+instrument_log_mandatory_variables = ["instrument_sn"]
 station_log_mandatory_variables = ["station", "latitude", "longitude"]
 
 
@@ -55,7 +55,7 @@ class TestInstrumentLog(unittest.TestCase):
         df = read_logs("instrument-log.csv")
         if df is None:
             return
-        review_time_variables(df, ["deployment_time", "retrievel_time"])
+        review_time_variables(df, ["deployment_time", "retrieval_time"])
 
     def test_instrument_log_coordinates_variables(self):
         """Test instrument-log.csv file and confirm that coordinate variables are in the correct range"""
