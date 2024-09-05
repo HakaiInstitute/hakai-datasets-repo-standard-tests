@@ -5,7 +5,7 @@ from glob import glob
 import pandas as pd
 
 logger = logging.getLogger(__name__)
-instrument_log_mandatory_variables = ["instrument_sn", "instrument_model"]
+instrument_log_mandatory_variables = ["instrument_sn"]
 station_log_mandatory_variables = ["station", "latitude", "longitude"]
 
 
