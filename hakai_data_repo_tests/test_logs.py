@@ -5,7 +5,7 @@ from glob import glob
 import pandas as pd
 
 logger = logging.getLogger(__name__)
-instrument_log_mandatory_variables = ["instrument_sn", "instrument_model"]
+instrument_log_mandatory_variables = ["instrument_sn"]
 station_log_mandatory_variables = ["station", "latitude", "longitude"]
 
 
@@ -42,7 +42,6 @@ def review_time_variables(df, time_variables):
 
 
 class TestInstrumentLog(unittest.TestCase):
-
     # Test Data format
     def test_instrument_log_mandatory_variables(self):
         """Test instrument-log.csv file to make sure that the mandatory columns are available"""
@@ -92,7 +91,9 @@ class TestStationLog(unittest.TestCase):
         df = read_logs("station-log.csv")
         if df is None:
             return
-        assert not df['station'].isna().any(), f"station-log.csv contains rows with no station assigned:\n{df.loc[df['station'].isna()]}"
+        assert (
+            not df["station"].isna().any()
+        ), f"station-log.csv contains rows with no station assigned:\n{df.loc[df['station'].isna()]}"
 
 
 class TestLogs(unittest.TestCase):
@@ -101,7 +102,9 @@ class TestLogs(unittest.TestCase):
         df_station = read_logs("station-log.csv")
         if df_instrument is None or df_station is None:
             return
-        duplicated_columns = set(df_instrument.columns) & set(df_station.columns) - {"station",}
+        duplicated_columns = set(df_instrument.columns) & set(df_station.columns) - {
+            "station",
+        }
         assert (
             len(duplicated_columns) == 0
         ), f"Duplicated columns exists between station-log and instrument-log: {duplicated_columns}"

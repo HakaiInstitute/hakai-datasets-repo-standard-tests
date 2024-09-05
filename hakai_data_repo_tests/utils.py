@@ -1,8 +1,11 @@
 import os
+import logging
 from fnmatch import fnmatch
 from glob import glob
 
 import yaml
+
+logger = logging.getLogger(__name__)
 
 # Load default configuration
 with open(
@@ -16,6 +19,8 @@ def read_data_repo_config():
     if os.path.exists("config.yaml"):
         with open("config.yaml", encoding="UTF-8") as file_handle:
             config.update(yaml.load(file_handle, Loader=yaml.loader.SafeLoader))
+    else:
+        logger.warning("No configuration file found. Using default configuration.")
 
     if os.path.exists(".fileignore"):
         with open(".fileignore", encoding="UTF-8") as file_handle:
