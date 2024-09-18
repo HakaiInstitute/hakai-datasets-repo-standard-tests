@@ -10,6 +10,7 @@ from . import utils
 
 logger = logging.getLogger(__name__)
 
+
 # config = utils.read_data_repo_config()
 config = yaml.safe_load("""
     data: 
@@ -41,7 +42,6 @@ class TestFilesFoldersExists(unittest.TestCase):
     def test_files_folders_exists(self):
         """Check if a list of files match an equivalent list of
         files by replaceing a specific expression by another."""
-        logger.warning("Configuration loaded: %s", config)
 
         search_paths = config["data"]["search_pattern"]
         missing_paths = []

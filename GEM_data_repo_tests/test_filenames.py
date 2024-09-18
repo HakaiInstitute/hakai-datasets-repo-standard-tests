@@ -47,6 +47,9 @@ class TestFileNameConvention(unittest.TestCase):
         bad_files = [
             file for file in files if not convention.fullmatch(os.path.basename(file))
         ]
+        for f in bad_files:
+            logger.error(f"Failed naming convention: {f}")
         assert (
             len(bad_files) == 0
         ), f"The following files do not follow the GEM nameing convention: {bad_files}"
+
