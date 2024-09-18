@@ -6,6 +6,7 @@ authors = ["Jessy Barrette <30420025+JessyBarrette@users.noreply.github.com>"]
 readme = "README.md"
 packages = [
     { include = "hakai_data_repo_tests", from = "." },
+    { include = "GEM_data_repo_tests", from = "." },
 ]
 
 [tool.poetry.dependencies]
