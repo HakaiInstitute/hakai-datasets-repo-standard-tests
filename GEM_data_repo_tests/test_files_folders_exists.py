@@ -2,6 +2,7 @@ import logging
 import os
 import re
 import unittest
+from parameterized import parameterized
 import yaml
 from glob import glob
 from pathlib import Path
@@ -39,31 +40,31 @@ config = yaml.safe_load("""
 )
 
 class TestFilesFoldersExists(unittest.TestCase):
-    def test_files_folders_exists(self):
+
+    @parameterized.expand(config["data"]["search_pattern"])
+    def test_files_folders_exists(self, search_path):
         """Check if a list of files match an equivalent list of
         files by replaceing a specific expression by another."""
 
-        search_paths = config["data"]["search_pattern"]
         missing_paths = []
-        logger.info("Checking search paths %s", search_paths)
-        for path in search_paths:
-            logger.info("Checking path %s", path)
+       
+        logger.info("Checking path %s", search_path)
 
-            # search for possible paths that might contain the patters in search_pattern
-            prefix, delim, last = path.rpartition('*/')
-            expanded_paths = list(Path('.').glob(f"{prefix}{delim}"))
+        # search for possible paths that might contain the patters in search_pattern
+        prefix, delim, last = search_path.rpartition('*/')
+        expanded_paths = list(Path('.').glob(f"{prefix}{delim}"))
 
-            # find exact matches for patters in search_pattern   
-            files = glob(path, recursive=config["data"].get("recursive", True))
+        # find exact matches for patters in search_pattern   
+        files = glob(search_path, recursive=config["data"].get("recursive", True))
 
-            # itirate over all possible paths and report an error if it is not contained in existing files/folder search
-            for ep_postfix in expanded_paths:
-                ep = str(ep_postfix)
-                if not files or  all(ep not in x for x in files):
-                    msg = f"'/{last}' missing from '{ep}'"
-                    logger.error(msg)
-                    missing_paths.append(msg)
+        # itirate over all possible paths and report an error if it is not contained in existing files/folder search
+        for ep_postfix in expanded_paths:
+            ep = str(ep_postfix)
+            if not files or  all(ep not in x for x in files):
+                msg = f"'/{last}' missing from '{ep}'"
+                logger.error(msg)
+                missing_paths.append(msg)
 
         assert (
             not missing_paths
-        ), f"The following requred files or folders are missing: {missing_paths}"
+        ), f"{missing_paths}"
