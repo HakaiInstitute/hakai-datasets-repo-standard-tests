@@ -32,7 +32,6 @@ config = yaml.safe_load("""
             'data/*/DR1900/*.txt',
             'data/*/Instruments/*.csv',
             'data/*/Instruments/*.xlsx',
-            'data/*/Instruments/*.jpg',
             'data/*/Instruments/*.txt'
         ]
         recursive: true
