@@ -17,7 +17,7 @@ config = yaml.safe_load("""
     data: 
         search_pattern: [
             'data/*/*_survey_final.csv',
-            'data/*/*_survey_raw.{jpg,jpeg}',
+            'data/*/*_survey_raw.jp*g',
             'data/*/Aquafluor',
             'data/*/Aquafluor/Changelog.txt',
             'data/*/DR1900',
@@ -26,11 +26,11 @@ config = yaml.safe_load("""
             'data/*/Instruments/Changelog.txt',
             'data/*/Aquafluor/*.csv',
             'data/*/Aquafluor/*.xlsx',
-            'data/*/Aquafluor/*.{jpg,jpeg}',
+            'data/*/Aquafluor/*.jp*g',
             'data/*/Aquafluor/*.txt',
             'data/*/DR1900/*.csv',
             'data/*/DR1900/*.xlsx',
-            'data/*/DR1900/*.{jpg,jpeg}',
+            'data/*/DR1900/*.jp*g',
             'data/*/DR1900/*.txt',
             'data/*/Instruments/*.csv',
             'data/*/Instruments/*.xlsx',
