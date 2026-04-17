@@ -41,7 +41,7 @@ class TestDataDictionary(unittest.TestCase):
         df_vars = read_data_dictionary()
         if df_vars is None:
             return
-        standard_name_table = "https://cfconventions.org/Data/cf-standard-names/79/src/cf-standard-name-table.xml"
+        standard_name_table = "https://raw.githubusercontent.com/cf-convention/cf-convention.github.io/refs/heads/main/Data/cf-standard-names/79/src/cf-standard-name-table.xml"
         df_standard_name = pd.read_xml(standard_name_table)
         unmatched_standard_names = [
             standard_name
